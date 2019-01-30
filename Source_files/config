@@ -1,0 +1,70 @@
+##DIRECTORY ARCHITECTURE
+#	projectDir
+#		|
+#		|--raw_data_directory
+#		|--results
+#			|-merge_raw_reads
+#			|-fastqcb4
+#			|-sickle or cutadapt or  trimommatic
+#			|-fastqc_after_trim
+#			|-trimmmed_reads
+#			|-Bowtie1 or Bowtie2 or STAR or BWA or HiSAT or TopHat (Depend on 
+#			|			on the option chosen, contain BAM or SAM file)
+#			|-htseq_count or express or RSEM or featurecounts
+
+##Path to project directory
+projectDir=path/to/project_directory
+
+##Path to raw_data directory. This directory should have subdirectory with sample name containing fastq files
+raw_data_dir=path/to/raw/project_directory/raw_data_directory
+
+##Result directory: Result from each of the functions (fastqc,trimming, alignment, feature count , etc)
+## will be hold in independent directory inside result directory
+result_dir==path/to/raw/project_directory/results
+
+#Sequencing is PE (Paied end) or SE(single end)
+type=PE
+
+#Path to GTF file, Only if you are executing feature count function.
+path_to_GTF=
+
+#Path to genome index file for mapping merge
+genomeDir=
+
+#Path to the kadi directory
+KadiRun=
+
+
+
+#number of CPU (8-16)
+CPU=8
+
+## COMMANDS To EXECUTE ##
+# IF ANY STEP IS NOT TO BE INCLUDED IN ANANLYSIS, SET THAT CMD VARIABLE TO 'PASS'.
+#e.g if trimming of reads has to be avoided then set CMD3 to PASS as CMD3=PASS
+
+# mergefiles of raw fastq files
+CMD1=merge_raw_reads
+# Fastqc of raw reads
+CMD2=fastqcb4
+# Trim reads
+#OPTIONS are cutadapt, sickle, trimommatic
+CMD3=sickle
+# Fastqc of processed reads
+CMD4=fastqc_after_trim./fastqc_after_trim
+#Mapping to reference genome/transcriptome
+#OPTIONS: Bowtie1, Bowtie2, STAR, BWA, HiSAT, TopHat
+CMD5=STAR
+#Aligned file format
+# OPTIONS: BAM or SAM (will be sorted by coordinate)
+CMD6=BAM
+#Feature count
+#OPTIONS: htseq_count, express, RSEM, featurecounts,
+CMD7=htseq_count
+####Differential_expression
+######OPTIONS: CuffDiff, DESeq2, EdgeR, Gfold, Noiseq
+######CMD8=DESeq2
+
+
+
+
